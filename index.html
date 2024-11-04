@@ -335,6 +335,8 @@ function speakItalian(text) {
     if ('speechSynthesis' in window) {
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = 'it-IT';  // Set to Italian
+utterance.voice = voicesList.find((voice) => voice.lang === 'it-IT')
+
         window.speechSynthesis.speak(utterance);
     } else {
         console.warn('Speech synthesis not supported in this browser.');
