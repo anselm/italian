@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Italian Flashcards</title>
+    <style>
+        /* Style for the flashcard */
+        .flashcard {
+            width: 300px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            font-family: Arial, sans-serif;
+            height: 400px;
+            overflow: hidden;
+        }
+        .flashcard div {
+            font-size: 2.2em;
+            margin: 10px 0;
+        }
+        .italian { font-weight: bold; color: #007d70; }
+        .english { font-style: italic; color: #555; }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+:root {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #1e1e1e;
+        --text-color: #f5f5f5;
+    }
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+    </style>
+</head>
+<body>
+
+<div class="flashcard" id="flashcard">
+    <div class="italian" id="italianText">Buongiorno</div>
+    <div class="english" id="englishText">Good morning</div>
+</div>
+
+<div class="buttons">
+  <button onclick="easy()">Easy</button>
+  <button onclick="medium()">Medium</button>
+  <button onclick="hard()">Hard</button>
+  <button onclick="flirty()">Flirty</button>
+  <button onclick="oceanic()">Oceanic</button>
+</div>
+
+<script>
+    const flashcards1 = [
+        { italian: "Buongiorno", english: "Good morning" },
+        { italian: "Ciao", english: "Hello" },
+        { italian: "Grazie", english: "Thank you" },
+        { italian: "Per favore", english: "Please" },
+        { italian: "Scusa", english: "Excuse me" },
+        { italian: "Sì", english: "Yes" },
+        { italian: "No", english: "No" },
+        { italian: "Mi dispiace", english: "I'm sorry" },
+        { italian: "A presto", english: "See you soon" },
+        { italian: "Come stai?", english: "How are you?" },
+        { italian: "Va bene", english: "It's okay" },
+        { italian: "Quanto costa?", english: "How much does it cost?" },
+        { italian: "Dove?", english: "Where?" },
+        { italian: "Qui", english: "Here" },
+        { italian: "Là", english: "There" },
+        { italian: "Chi?", english: "Who?" },
+        { italian: "Quando?", english: "When?" },
+        { italian: "Perché?", english: "Why?" },
+        { italian: "Come?", english: "How?" },
+        { italian: "Molto", english: "A lot" },
+        { italian: "Poco", english: "A little" },
+        { italian: "Subito", english: "Right away" },
+        { italian: "Che cosa?", english: "What?" },
+        { italian: "Mi piace", english: "I like it" },
+        { italian: "Non lo so", english: "I don't know" },
+        { italian: "Ho fame", english: "I'm hungry" },
+        { italian: "Ho sete", english: "I'm thirsty" },
+        { italian: "Ho caldo", english: "I'm hot" },
+        { italian: "Ho freddo", english: "I'm cold" },
+        { italian: "Aiuto!", english: "Help!" },
+        { italian: "Perfetto", english: "Perfect" },
+        { italian: "Capisco", english: "I understand" },
+        { italian: "Non capisco", english: "I don't understand" },
+        { italian: "Buona fortuna", english: "Good luck" },
+        { italian: "Piano", english: "Slowly" },
+        { italian: "Ripeti", english: "Repeat" },
+        { italian: "Sto bene", english: "I'm fine" },
+        { italian: "A domani", english: "See you tomorrow" },
+        { italian: "Andiamo!", english: "Let's go!" },
+        { italian: "Fermati", english: "Stop" },
+        { italian: "Attento", english: "Careful" },
+        { italian: "Ecco", english: "Here it is" },
+        { italian: "Arrivo", english: "I'm coming" },
+        { italian: "Davvero?", english: "Really?" },
+        { italian: "Di niente", english: "You're welcome" },
+        { italian: "Buon appetito", english: "Enjoy your meal" },
+        { italian: "Aspetta", english: "Wait" },
+        { italian: "Salute!", english: "Cheers!" },
+        { italian: "Va bene così", english: "It's fine like this" },
+        { italian: "Non importa", english: "It doesn't matter" },
+        { italian: "Ci vediamo", english: "See you" },
+        { italian: "Benvenuto", english: "Welcome" },
+        { italian: "Ottimo", english: "Great" },
+        { italian: "Troppo", english: "Too much" },
+        { italian: "Giusto", english: "Right" },
+        { italian: "Mi manca", english: "I miss it" },
+        { italian: "Abbastanza", english: "Enough" },
+        { italian: "Forse", english: "Maybe" },
+        { italian: "Facile", english: "Easy" },
+        { italian: "Difficile", english: "Difficult" },
+        { italian: "Importante", english: "Important" },
+        { italian: "Divertente", english: "Fun" },
+        { italian: "Spero di sì", english: "I hope so" },
+        { italian: "Che bello!", english: "How nice!" },
+        { italian: "Non posso", english: "I can't" },
+        { italian: "Ci sto", english: "I'm in" },
+        { italian: "Sicuro?", english: "Are you sure?" },
+        { italian: "Buona idea", english: "Good idea" },
+        { italian: "Penso di sì", english: "I think so" },
+        { italian: "Non fa niente", english: "No problem" },
+        { italian: "Sono pronto", english: "I'm ready" },
+        { italian: "Non male", english: "Not bad" },
+        { italian: "Ti amo", english: "I love you" },
+        { italian: "Anche a me", english: "Me too" },
+        { italian: "Smettila", english: "Stop it" },
+        { italian: "Vediamo", english: "Let's see" },
+];
+
+const flashcards2 = [
+    { italian: "Dove sei stato ieri sera?", english: "Where were you last night?" },
+    { italian: "Abbiamo parlato per ore al telefono.", english: "We talked for hours on the phone." },
+    { italian: "Oggi è una giornata molto calda.", english: "Today is a very hot day." },
+    { italian: "Hai già finito i tuoi compiti?", english: "Have you finished your homework yet?" },
+    { italian: "Mi piace molto questo ristorante.", english: "I really like this restaurant." },
+    { italian: "Devo comprare il biglietto del treno.", english: "I need to buy the train ticket." },
+    { italian: "Posso prendere in prestito il tuo libro?", english: "Can I borrow your book?" },
+    { italian: "La tua torta è davvero deliziosa.", english: "Your cake is really delicious." },
+    { italian: "Il mercato è molto affollato oggi.", english: "The market is very crowded today." },
+    { italian: "Lui sa suonare la chitarra molto bene.", english: "He can play the guitar very well." },
+    { italian: "Questa sera ceniamo a casa tua.", english: "Tonight we're having dinner at your place." },
+    { italian: "Sto cercando un buon libro da leggere.", english: "I’m looking for a good book to read." },
+    { italian: "Questa strada è molto lunga e stretta.", english: "This road is very long and narrow." },
+    { italian: "Hai sentito le notizie di oggi?", english: "Did you hear today's news?" },
+    { italian: "Il tuo cane è molto simpatico!", english: "Your dog is very friendly!" },
+    { italian: "A che ora dobbiamo partire domani?", english: "What time do we need to leave tomorrow?" },
+    { italian: "Sto imparando l'italiano da alcuni mesi.", english: "I have been learning Italian for a few months." },
+    { italian: "Andiamo a prendere un caffè insieme?", english: "Shall we go get a coffee together?" },
+    { italian: "I bambini giocano nel parco ogni giorno.", english: "The children play in the park every day." },
+    { italian: "Voglio provare quel nuovo ristorante in centro.", english: "I want to try that new restaurant downtown." },
+    { italian: "Lui lavora in un ufficio vicino alla stazione.", english: "He works in an office near the station." },
+    { italian: "È una storia interessante, vero?", english: "It’s an interesting story, isn’t it?" },
+    { italian: "Mi sveglio presto ogni mattina per fare yoga.", english: "I wake up early every morning to do yoga." },
+    { italian: "Ci vediamo davanti alla scuola alle otto.", english: "See you in front of the school at eight." },
+    { italian: "Lei ha comprato un bel regalo per sua madre.", english: "She bought a nice gift for her mother." },
+    { italian: "Non mi piace molto guardare la TV.", english: "I don’t really like watching TV." },
+    { italian: "Questa spiaggia è molto tranquilla e bella.", english: "This beach is very calm and beautiful." },
+    { italian: "Hai trovato la tua nuova casa?", english: "Did you find your new house?" },
+    { italian: "Abbiamo deciso di fare una festa sabato.", english: "We decided to throw a party on Saturday." },
+    { italian: "Il gatto dorme sempre sul divano.", english: "The cat always sleeps on the sofa." },
+    { italian: "Posso vedere il menù, per favore?", english: "Can I see the menu, please?" },
+    { italian: "È difficile scegliere un solo piatto.", english: "It's hard to choose just one dish." },
+    { italian: "Oggi sono molto occupato con il lavoro.", english: "Today I am very busy with work." },
+    { italian: "Il museo apre alle nove del mattino.", english: "The museum opens at nine in the morning." },
+    { italian: "Vorrei andare a fare una passeggiata.", english: "I’d like to go for a walk." },
+    { italian: "Hai visto il nuovo film di ieri?", english: "Did you see the new movie yesterday?" },
+    { italian: "Lui legge molti libri ogni mese.", english: "He reads many books every month." },
+    { italian: "Andiamo al cinema dopo cena?", english: "Shall we go to the cinema after dinner?" },
+    { italian: "Questa città è piena di storia e arte.", english: "This city is full of history and art." },
+    { italian: "Puoi spiegare di nuovo questa parte?", english: "Can you explain this part again?" }
+];
+
+
+const flashcards3 = [
+
+    { italian: "Mi chiamo Maria e sono di Roma.", english: "My name is Maria, and I am from Rome." },
+    { italian: "Il treno per Milano parte alle nove.", english: "The train to Milan leaves at nine." },
+    { italian: "Sto cercando un posto dove mangiare.", english: "I am looking for a place to eat." },
+    { italian: "Puoi aiutarmi con questo esercizio?", english: "Can you help me with this exercise?" },
+    { italian: "Voglio imparare l'italiano per viaggiare.", english: "I want to learn Italian to travel." },
+    { italian: "La mia famiglia vive in una piccola città.", english: "My family lives in a small town." },
+    { italian: "Abbiamo deciso di fare una passeggiata al parco.", english: "We decided to take a walk in the park." },
+    { italian: "Qual è il tuo piatto preferito?", english: "What is your favorite dish?" },
+    { italian: "Questo libro è molto interessante e utile.", english: "This book is very interesting and useful." },
+    { italian: "Vorrei ordinare una pizza margherita, per favore.", english: "I would like to order a Margherita pizza, please." },
+    { italian: "Quanti anni hai e dove vivi?", english: "How old are you, and where do you live?" },
+    { italian: "Andiamo al mare questo fine settimana.", english: "We're going to the beach this weekend." },
+    { italian: "C'è un buon ristorante vicino al mio albergo.", english: "There is a good restaurant near my hotel." },
+    { italian: "Mi piace leggere e ascoltare musica la sera.", english: "I like to read and listen to music in the evening." },
+    { italian: "L'inverno scorso ha nevicato molto.", english: "Last winter, it snowed a lot." },
+    { italian: "Non ho mai visitato Venezia, ma vorrei andare.", english: "I have never visited Venice, but I would like to go." },
+    { italian: "I bambini stanno giocando nel giardino.", english: "The children are playing in the garden." },
+    { italian: "Perché hai deciso di studiare all'estero?", english: "Why did you decide to study abroad?" },
+    { italian: "Lavoro in una piccola azienda di tecnologia.", english: "I work in a small tech company." },
+    { italian: "La mia casa ha una bella vista sulle montagne.", english: "My house has a beautiful view of the mountains." },
+    { italian: "Vorrei provare a fare un dolce italiano.", english: "I would like to try making an Italian dessert." },
+    { italian: "Hai già visto quel film al cinema?", english: "Have you already seen that movie at the cinema?" },
+    { italian: "Lui è molto gentile e disponibile con tutti.", english: "He is very kind and helpful to everyone." },
+    { italian: "Oggi ho imparato molte cose nuove.", english: "Today I learned many new things." },
+    { italian: "Spero che tu abbia una buona giornata!", english: "I hope you have a good day!" },
+    { italian: "Il weekend scorso siamo andati in montagna.", english: "Last weekend, we went to the mountains." },
+    { italian: "Lei ha sempre un sorriso sul volto.", english: "She always has a smile on her face." },
+    { italian: "Questo caffè è forte ma molto buono.", english: "This coffee is strong but very good." },
+    { italian: "Stasera andiamo a vedere una mostra d'arte.", english: "Tonight we're going to see an art exhibit." },
+    { italian: "Voglio migliorare la mia pronuncia italiana.", english: "I want to improve my Italian pronunciation." },
+    { italian: "Non ho capito la tua ultima domanda.", english: "I didn’t understand your last question." },
+    { italian: "Sono felice di passare il tempo con te.", english: "I am happy to spend time with you." },
+    { italian: "Oggi il tempo è perfetto per una passeggiata.", english: "The weather is perfect for a walk today." },
+    { italian: "Hai mai provato a cucinare un piatto italiano?", english: "Have you ever tried cooking an Italian dish?" },
+    { italian: "Dobbiamo comprare alcuni ingredienti per la cena.", english: "We need to buy some ingredients for dinner." },
+    { italian: "C'è qualcosa che vorresti fare oggi?", english: "Is there something you would like to do today?" },
+    { italian: "Il film inizia alle sette, non essere in ritardo.", english: "The movie starts at seven, don’t be late." },
+    { italian: "Mi piacerebbe vedere il Colosseo a Roma.", english: "I would like to see the Colosseum in Rome." },
+    { italian: "Abbiamo prenotato un tavolo per due persone.", english: "We have reserved a table for two people." },
+    { italian: "Puoi parlare un po' più lentamente, per favore?", english: "Can you speak a little slower, please?" },
+    { italian: "Penso che sia una buona idea fare una pausa.", english: "I think it’s a good idea to take a break." }
+];
+
+const flashcards_flirt = [
+    { italian: "Hai degli occhi che incantano.", english: "You have enchanting eyes." },
+    { italian: "Posso offrirti un drink?", english: "Can I buy you a drink?" },
+    { italian: "Mi fai sorridere senza motivo.", english: "You make me smile for no reason." },
+    { italian: "Ogni volta che ti vedo, il cuore batte forte.", english: "Every time I see you, my heart beats fast." },
+    { italian: "Sei più dolce di un gelato in estate.", english: "You’re sweeter than ice cream in the summer." },
+    { italian: "Passiamo la serata insieme?", english: "Shall we spend the evening together?" },
+    { italian: "Non riesco a smettere di pensarti.", english: "I can't stop thinking about you." },
+    { italian: "Hai un sorriso che illumina la stanza.", english: "You have a smile that lights up the room." },
+    { italian: "Cosa faresti se fossimo soli adesso?", english: "What would you do if we were alone right now?" },
+    { italian: "Sei come un sogno a occhi aperti.", english: "You're like a daydream." },
+    { italian: "Voglio scoprire tutto su di te.", english: "I want to discover everything about you." },
+    { italian: "Con te, il tempo vola.", english: "With you, time flies." },
+    { italian: "Stasera sognerò di te.", english: "Tonight, I'll be dreaming of you." },
+    { italian: "Vorrei che questo momento non finisse mai.", english: "I wish this moment would never end." },
+    { italian: "Ogni scusa è buona per vederti.", english: "Any excuse is good to see you." },
+    { italian: "Cosa fai per essere così irresistibile?", english: "What do you do to be so irresistible?" },
+    { italian: "Sei sempre nei miei pensieri.", english: "You’re always on my mind." },
+    { italian: "Non credevo che la perfezione esistesse... finché non ti ho incontrato.", english: "I didn’t think perfection existed... until I met you." },
+    { italian: "Con te, tutto sembra possibile.", english: "With you, everything seems possible." },
+    { italian: "Mi perdo ogni volta che ti guardo negli occhi.", english: "I get lost every time I look into your eyes." },
+    { italian: "Hai un’energia che mi attira.", english: "You have an energy that draws me in." },
+    { italian: "Insieme potremmo fare scintille.", english: "Together, we could make sparks fly." },
+    { italian: "Mi piace come mi guardi.", english: "I like the way you look at me." },
+    { italian: "Ci vediamo a cena, magari a lume di candela?", english: "Shall we meet for dinner, maybe by candlelight?" },
+    { italian: "Con te, la notte è più bella.", english: "With you, the night is more beautiful." },
+    { italian: "Sei il mio pensiero felice.", english: "You're my happy thought." },
+    { italian: "Non riesco a smettere di sorridere quando sei vicino.", english: "I can’t stop smiling when you're around." },
+    { italian: "Ti va di ballare insieme?", english: "Would you like to dance together?" },
+    { italian: "Il tuo profumo mi fa girare la testa.", english: "Your scent makes my head spin." },
+    { italian: "Sei la tentazione in persona.", english: "You are temptation in person." },
+    { italian: "Ci perdiamo in un’avventura?", english: "Shall we get lost in an adventure?" },
+    { italian: "Vorrei averti qui, adesso.", english: "I wish I had you here, right now." }
+];
+
+const flashcards_ocean = [
+    { italian: "L'acqua del mare è limpida e cristallina.", english: "The sea water is clear and crystalline." },
+    { italian: "Ho visto una tartaruga marina nuotare vicino a me.", english: "I saw a sea turtle swimming close to me." },
+    { italian: "La barriera corallina è piena di colori vivaci.", english: "The coral reef is full of vibrant colors." },
+    { italian: "Il silenzio sott'acqua è incredibilmente pacifico.", english: "The silence underwater is incredibly peaceful." },
+    { italian: "Mi piace immergermi per esplorare il mondo marino.", english: "I love diving to explore the marine world." },
+    { italian: "Abbiamo trovato un branco di pesci tropicali.", english: "We found a school of tropical fish." },
+    { italian: "Le onde del mare hanno un suono rilassante.", english: "The waves of the sea have a relaxing sound." },
+    { italian: "La sabbia è bianca e morbida sotto i piedi.", english: "The sand is white and soft underfoot." },
+    { italian: "Spero di vedere un delfino durante l'immersione.", english: "I hope to see a dolphin during the dive." },
+    { italian: "Gli squali di barriera sono maestosi e misteriosi.", english: "Reef sharks are majestic and mysterious." },
+    { italian: "I coralli creano un habitat per molte specie.", english: "The corals create a habitat for many species." },
+    { italian: "Vedo una murena nascosta tra le rocce.", english: "I see a moray eel hidden among the rocks." },
+    { italian: "L'acqua salata mi fa galleggiare facilmente.", english: "The saltwater makes me float easily." },
+    { italian: "Ogni immersione rivela una nuova meraviglia marina.", english: "Every dive reveals a new marine wonder." },
+    { italian: "La luce del sole danza sul fondo dell'oceano.", english: "The sunlight dances on the ocean floor." },
+    { italian: "Le stelle marine sono creature affascinanti.", english: "Starfish are fascinating creatures." },
+    { italian: "Abbiamo raccolto delle conchiglie sulla spiaggia.", english: "We collected some shells on the beach." },
+    { italian: "Un polpo è sbucato da una piccola grotta!", english: "An octopus popped out from a small cave!" },
+    { italian: "I cavallucci marini si mimetizzano tra le alghe.", english: "Seahorses camouflage themselves among the seaweed." },
+    { italian: "Sott'acqua, tutto sembra muoversi lentamente.", english: "Underwater, everything seems to move slowly." },
+    { italian: "Vorrei passare tutto il giorno a esplorare il mare.", english: "I would like to spend all day exploring the sea." },
+    { italian: "I raggi di sole attraversano la superficie dell'acqua.", english: "The sun rays pierce through the water's surface." },
+    { italian: "La fauna marina è così diversa e sorprendente.", english: "The marine life is so diverse and amazing." },
+    { italian: "Abbiamo visto una manta nuotare graziosamente.", english: "We saw a manta ray swimming gracefully." },
+    { italian: "Questo è uno dei migliori posti per fare snorkeling.", english: "This is one of the best places for snorkeling." },
+    { italian: "Le barriere coralline sono delicate e preziose.", english: "Coral reefs are delicate and precious." },
+    { italian: "C'è un piccolo relitto da esplorare qui sotto.", english: "There is a small wreck to explore down here." },
+    { italian: "Le alghe ondeggiano dolcemente con la corrente.", english: "The seaweed sways gently with the current." },
+    { italian: "Un banco di pesci argentati ci ha circondato.", english: "A school of silver fish surrounded us." },
+    { italian: "La marea cambia il paesaggio del mare ogni giorno.", english: "The tide changes the sea landscape every day." }
+];
+
+
+let flashcards = flashcards1
+
+function easy() {
+  flashcards = flashcards1
+  next()
+}
+
+function medium() {
+  flashcards = flashcards2
+  next()
+}
+
+function hard() {
+  flashcards = flashcards3
+  next()
+}
+
+function flirty() {
+  flashcards = flashcards_flirt
+  next()
+}
+
+function oceanic() {
+  flashcards = flashcards_ocean
+  next()
+}
+
+function speakItalian(text) {
+    if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'it-IT';  // Set to Italian
+        window.speechSynthesis.speak(utterance);
+    } else {
+        console.warn('Speech synthesis not supported in this browser.');
+    }
+}
+
+    let currentIndex = 0;
+
+    function updateFlashcard() {
+        const card = flashcards[currentIndex];
+        document.getElementById('italianText').innerText = card.italian;
+        document.getElementById('englishText').innerText = card.english;
+
+speakItalian(card.italian) 
+
+   }
+
+    function next() {
+        currentIndex = Math.floor( Math.random() * flashcards.length )
+        updateFlashcard();
+    }
+
+    // Initialize first flashcard
+    updateFlashcard();
+</script>
+
+</body>
+</html>
+
